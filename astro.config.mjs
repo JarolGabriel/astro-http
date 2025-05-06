@@ -12,6 +12,6 @@ import vue from "@astrojs/vue";
 export default defineConfig({
   site: "https://example.com",
   integrations: [mdx(), sitemap(), db(), vue()],
-  output: "static",
+  output: "server",
   adapter: cloudflare(),
 });
