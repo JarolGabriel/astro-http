@@ -12,16 +12,39 @@ export const updatePostLikes = defineAction({
   handler: async ({ postId, increment }) => {
     // const posts = await db.select().from(Posts).where(eq(Posts.id, postId));
 
-    const { data, error } = await actions.getPostLikes(postId);
+    // const { data, error } = await actions.getPostLikes(postId);
 
-    if (error) {
-      console.log(error);
-      throw new Error("algo salio mal");
-    }
+    // if (error) {
+    //   console.log(error);
+    //   throw new Error("algo salio mal");
+    // }
 
-    const { exists, likes } = data;
+    // const { exists, likes } = data;
 
-    if (!exists) {
+    // if (!exists) {
+    //   const newPost = {
+    //     id: postId,
+    //     title: "Post not found",
+    //     likes: 0,
+    //   };
+
+    //   await db.insert(Posts).values(newPost);
+    // }
+
+    // // post.likes = post.likes + increment;
+
+    // await db
+    //   .update(Posts)
+    //   .set({
+    //     likes: likes + increment,
+    //   })
+    //   .where(eq(Posts.id, postId));
+
+    // return true;
+
+    const posts = await db.select().from(Posts).where(eq(Posts.id, postId));
+
+    if (posts.length === 0) {
       const newPost = {
         id: postId,
         title: "Post not found",
@@ -29,16 +52,13 @@ export const updatePostLikes = defineAction({
       };
 
       await db.insert(Posts).values(newPost);
+      posts.push(newPost);
     }
 
-    // post.likes = post.likes + increment;
+    const post = posts.at(0)!;
+    post.likes = post.likes + increment;
 
-    await db
-      .update(Posts)
-      .set({
-        likes: likes + increment,
-      })
-      .where(eq(Posts.id, postId));
+    await db.update(Posts).set(post).where(eq(Posts.id, postId));
 
     return true;
   },
