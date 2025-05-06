@@ -1,3 +1,6 @@
+name = "mi-worker"
+main = "src/index.ts"
+
 [[kv_namespaces]]
 binding = "SESSION"
 preview_id = "1930bae187fe42ccbf31bc899aeee766"

@@ -26,6 +26,7 @@
     "vue": "^3.5.12"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250506.0",
     "@types/canvas-confetti": "^1.6.4",
     "@types/lodash.debounce": "^4.0.9",
     "@types/node": "^22.15.9"
